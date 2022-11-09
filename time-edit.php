@@ -9,10 +9,9 @@ require 'dbcon.php';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    ​
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Editar Aluno</title>
+    <title>Editar Time</title>
 </head>
 
 <body>
@@ -22,44 +21,47 @@ require 'dbcon.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Editar aluno
+                        <h4>Editar Time
                             <a href="index.php" class="btn btn-danger float-end">VOLTAR</a>
                         </h4>
                     </div>
 
                     <div class="card-body">
-                        ​ <?php
+                    <?php
                        if(isset($_GET['id'])) {
-                           $student_id = mysqli_real_escape_string($con, $_GET['id']);
-                           $query = "SELECT * FROM students WHERE id='$student_id' ";
+                           $id = mysqli_real_escape_string($con, $_GET['id']);
+                           $query = "SELECT * FROM tbtime WHERE id='$id' ";
                            $query_run = mysqli_query($con, $query);
                           if(mysqli_num_rows($query_run) > 0) {
-                               $student = mysqli_fetch_array($query_run);
+                               $time = mysqli_fetch_array($query_run);
                                ?>
                         <form action="code.php" method="POST">
-                            <input type="hidden" name="student_id" value="<?= $student['id']; ?>">
+                            <input type="hidden" name="id" value="<?= $time['ID']; ?>">
                             <div class="mb-3">
-                                <label>Nome</label>
-                                <input type="text" name="name" value="<?=$student['name'];?>" class="form-control">
+                                <label>Time</label>
+                                <input type="text" name="time" value="<?=$time['TIME'];?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label>Email</label>
-                                <input type="email" name="email" value="<?=$student['email'];?>" class="form-control">
+                                <label>País</label>
+                                <input type="text" name="pais" value="<?=$time['PAIS'];?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label>Telefone</label>
-                                <input type="text" name="phone" value="<?=$student['phone'];?>" class="form-control">
+                                <label>Número de títulos</label>
+                                <input type="number" name="numtitulos" value="<?=$time['NUMTITULOS'];?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label>Curso</label>
-                                <input type="text" name="course" value="<?=$student['course'];?>" class="form-control">
+                                <label>Treinador</label>
+                                <input type="text" name="treinador" value="<?=$time['TREINADOR'];?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <button type="submit" name="update_student" class="btn btn-primary">
-                                    Atualizar Aluno
+                                <label>Cor do uniforme</label>
+                                <input type="text" name="coruniforme" value="<?=$time['CORUNIFORME'];?>" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" name="update_time" class="btn btn-primary">
+                                    Atualizar Time
                                 </button>
                             </div>
-                            ​
                         </form>
                         <?php
                            }
@@ -74,7 +76,7 @@ require 'dbcon.php';
             </div>
         </div>
     </div>
-    ​ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

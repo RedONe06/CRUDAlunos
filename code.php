@@ -1,53 +1,56 @@
 <?php
 session_start();
 require 'dbcon.php';
-if(isset($_POST['delete_student'])){
-   $student_id = mysqli_real_escape_string($con, $_POST['delete_student']);
-   $query = "DELETE FROM students WHERE id='$student_id' ";
+if(isset($_POST['delete_time'])){
+   $id = mysqli_real_escape_string($con, $_POST['delete_time']);
+   $query = "DELETE FROM tbtime WHERE id='$id' ";
    $query_run = mysqli_query($con, $query);
  if($query_run) {
-       $_SESSION['message'] = "Aluno excluido com sucesso";
+       $_SESSION['message'] = "Time excluido com sucesso";
        header("Location: index.php");
        exit(0);
    }   else   {
-       $_SESSION['message'] = "Não foi possivel excluir o aluno";
+       $_SESSION['message'] = "Não foi possivel excluir o time";
        header("Location: index.php");
        exit(0);
    }
 }
-if(isset($_POST['update_student'])){
-   $student_id = mysqli_real_escape_string($con, $_POST['student_id']);
-   $name = mysqli_real_escape_string($con, $_POST['name']);
-   $email = mysqli_real_escape_string($con, $_POST['email']);
-   $phone = mysqli_real_escape_string($con, $_POST['phone']);
-   $course = mysqli_real_escape_string($con, $_POST['course']);
-  $query = "UPDATE students SET name='$name', email='$email', phone='$phone', course='$course' WHERE id='$student_id' ";
+if(isset($_POST['update_time'])){
+   $id = mysqli_real_escape_string($con, $_POST['id']);
+   $time = mysqli_real_escape_string($con, $_POST['time']);
+   $pais = mysqli_real_escape_string($con, $_POST['pais']);
+   $numtitulos = mysqli_real_escape_string($con, $_POST['numtitulos']);
+   $treinador = mysqli_real_escape_string($con, $_POST['treinador']);
+   $coruniforme = mysqli_real_escape_string($con, $_POST['coruniforme']);
+  $query = "UPDATE tbtime SET time='$time', pais='$pais', numtitulos='$numtitulos', treinador='$treinador', coruniforme='$coruniforme' WHERE id='$id'";
    $query_run = mysqli_query($con, $query);
   if($query_run) {
-       $_SESSION['message'] = "Aluno atualizado com sucesso";
+       $_SESSION['message'] = "Time atualizado com sucesso";
        header("Location: index.php");
        exit(0);
    }   else   {
-       $_SESSION['message'] = "Aluno não atualizado";
+       $_SESSION['message'] = "Time não atualizado";
        header("Location: index.php");
        exit(0);
    }
 }
 
- if(isset($_POST['save_student'])){
-   $name = mysqli_real_escape_string($con, $_POST['name']);
-   $email = mysqli_real_escape_string($con, $_POST['email']);
-   $phone = mysqli_real_escape_string($con, $_POST['phone']);
-   $course = mysqli_real_escape_string($con, $_POST['course']);
-   $query = "INSERT INTO students (name,email,phone,course) VALUES ('$name','$email','$phone','$course')";
+ if(isset($_POST['save_time'])){
+    $id = mysqli_real_escape_string($con, $_POST['id']);
+   $time = mysqli_real_escape_string($con, $_POST['time']);
+   $pais = mysqli_real_escape_string($con, $_POST['pais']);
+   $numtitulos = mysqli_real_escape_string($con, $_POST['numtitulos']);
+   $treinador = mysqli_real_escape_string($con, $_POST['treinador']);
+   $coruniforme = mysqli_real_escape_string($con, $_POST['coruniforme']);
+   $query = "INSERT INTO tbtime (time, pais, numtitulos, treinador, coruniforme) VALUES ('$time','$pais','$numtitulos','$treinador', '$coruniforme')";
   $query_run = mysqli_query($con, $query);
    if($query_run)  {
-       $_SESSION['message'] = "Aluno cadastrado com sucesso!";
-       header("Location: student-create.php");
+       $_SESSION['message'] = "Time cadastrado com sucesso!";
+       header("Location: time-create.php");
        exit(0);
    }  else  {
-       $_SESSION['message'] = "Aluno não cadastrado";
-       header("Location: student-create.php");
+       $_SESSION['message'] = "Time não cadastrado";
+       header("Location: time-create.php");
        exit(0);
    }
 }
